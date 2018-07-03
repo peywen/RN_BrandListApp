@@ -4,34 +4,38 @@ import Expo from 'expo';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ListItem from './components/ListItem';
-import { fetchBrandsAPI, setBrands } from './src/reducer/brandReducer';
+import { fetchBrandsAPI2, setBrands } from './src/reducer/brandReducer';
 
 const mapStateToProps = (state) => ({
   brands: state.brands.brandList
 });
 
 const mapDispatchToProps = {
-  setBrands
+  setBrands,
+  fetchBrandsAPI2
 };
 
 class mainView extends React.Component {
 static propTypes = {
   brands: PropTypes.arrayOf(PropTypes.object),
   // brands: PropTypes.array.isRequired,
-  setBrands: PropTypes.func.isRequired
+  setBrands: PropTypes.func.isRequired,
+  fetchBrandsAPI2: PropTypes.func.isRequired
 }
 
 componentDidMount() {
-  this.getBrands();
+  // this.getBrands();
+  this.props.fetchBrandsAPI2();
 }
 
-getBrands = async () => {
-  console.log('2222');
-  const brands = await fetchBrandsAPI();
-  console.log('33333');
-  this.props.setBrands(brands);
-  console.log('4444', this.props.brands);
-}
+// Use action instead
+// getBrands = async () => {
+//   console.log('2222');
+//   const brands = await fetchBrandsAPI();
+//   console.log('33333');
+//   this.props.setBrands(brands);
+//   console.log('4444', this.props.brands);
+// }
 
 renderItem = (element) => (
   <ListItem

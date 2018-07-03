@@ -3,13 +3,13 @@ const initialState = {
   text: ''
 };
 
-export const fetchBrandsAPI = () => fetch('https://core-staging.honestbee.com/api/brands?country_code=TW&serviceType=food&locale=zh-TW')
+const fetchBrandsAPI = () => fetch('https://core-staging.honestbee.com/api/brands?country_code=TW&serviceType=food&locale=zh-TW')
   .then(result => result.json());
 
-// export const setBrands1 = () => async (dispatch, data) => {
-//   console.log('OKOK');
-//   dispatch(setBrands(data));
-// };
+export const fetchBrandsAPI2 = () => async (dispatch) => {
+  const data = await fetchBrandsAPI();
+  dispatch(setBrands(data));
+};
 
 export const setBrands = (brands) => ({
   type: 'list_brand',
